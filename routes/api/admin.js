@@ -47,7 +47,10 @@ router.post("/login", async (req, res) => {
     } else if (password !== adminInfo.password) {
       res.status(400).json("Password not matched");
     } else {
-      res.json("Successfully login");
+      res.json({
+        message: "Successfully loged in",
+        status: true,
+      });
     }
   } catch (error) {
     res.status(500).send("Server error");

@@ -38,7 +38,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// News By ID
+// News By ID.
 router.get("/:id", async (req, res) => {
   await NewsImg.find({ _id: req.params.id })
     .populate("newsId")
