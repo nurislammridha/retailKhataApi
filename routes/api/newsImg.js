@@ -49,7 +49,10 @@ router.post(
     try {
       info = new NewsImg(info);
       await info.save();
-      res.json("Inserted Successfully");
+      res.status(200).json({
+        message: "Inserted Successfully",
+        status: true,
+      });
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error");
@@ -68,6 +71,7 @@ router.get("/", async (req, res) => {
         res.status(200).json({
           result: data,
           message: "Get successfully!",
+          status: true,
         });
       }
     });
@@ -103,6 +107,7 @@ router.put("/feature/:id", upload.single("feature_img"), async (req, res) => {
       } else {
         res.status(200).json({
           message: "Feature were updated successfully!",
+          status: true,
         });
       }
     }
@@ -137,6 +142,7 @@ router.put(
         } else {
           res.status(200).json({
             message: "Thumbnail were updated successfully!",
+            status: true,
           });
         }
       }
@@ -165,12 +171,12 @@ router.put(
 
 //delete category
 router.delete("/:id", async (req, res) => {
-  await NewsImg.find({ newsId: req.params.id }, (err, data) => {
+  await NewsImg.find({ _id: req.params.id }, (err, data) => {
     const [info] = data;
     fs.unlinkSync(info.featureImg);
     fs.unlinkSync(info.thumbnailImg);
   });
-  await NewsImg.deleteOne({ newsId: req.params.id }, (err) => {
+  await NewsImg.deleteOne({ _id: req.params.id }, (err) => {
     if (err) {
       res.status(500).json({
         error: "There was a server side error!",
@@ -178,6 +184,7 @@ router.delete("/:id", async (req, res) => {
     } else {
       res.status(200).json({
         message: "News Img was deleted successfully!",
+        status: true,
       });
     }
   });

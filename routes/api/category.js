@@ -10,11 +10,14 @@ router.post("/", async (req, res) => {
     let catName = await Category.findOne({ categoryName });
     //see if user exists
     if (catName) {
-      return res.status(400).json({ msg: "Category already exist" });
+      return res.status(400).json({ message: "Category already exist" });
     }
     category = new Category({ categoryName });
     await category.save();
-    res.json("Category inserted succesfully");
+    res.status(200).json({
+      message: "Category inserted succesfully",
+      status: true,
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
@@ -32,6 +35,7 @@ router.get("/", async (req, res) => {
         res.status(200).json({
           result: data,
           message: "Todo was inserted successfully!",
+          status: true,
         });
       }
     });
@@ -52,6 +56,7 @@ router.get("/:id", async (req, res) => {
       res.status(200).json({
         result: obj,
         message: "Todo was inserted successfully!",
+        status: true,
       });
     }
   });
@@ -72,6 +77,7 @@ router.put("/:id", async (req, res) => {
       } else {
         res.status(200).json({
           message: "Category were updated successfully!",
+          status: true,
         });
       }
     }
@@ -88,6 +94,7 @@ router.delete("/:id", async (req, res) => {
     } else {
       res.status(200).json({
         message: "Category was deleted successfully!",
+        status: true,
       });
     }
   });

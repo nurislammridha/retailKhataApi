@@ -43,9 +43,15 @@ router.post("/login", async (req, res) => {
     let adminInfo = await Admin.findOne();
 
     if (email !== adminInfo.email) {
-      res.status(400).json("You are not registered");
+      res.status(400).json({
+        message: "You are not registered",
+        status: false,
+      });
     } else if (password !== adminInfo.password) {
-      res.status(400).json("Password not matched");
+      res.status(400).json({
+        message: "Password not matched",
+        status: false,
+      });
     } else {
       res.json({
         message: "Successfully loged in",
@@ -57,4 +63,44 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//Change Password
+//change password
+router.post("/change_password", async (req, res) => {
+  const { email, oldPassword, newPassword } = req.body;
+  try {
+    await Admin.find({ email }, async (err, data) => {
+      if (err) {
+        res.status(400).json("Server error");
+      } else {
+        const [info] = data;
+        if (data.length === 0) {
+          res.status(400).json("You are not registered");
+        } else if (info.password === oldPassword) {
+          await Admin.updateOne(
+            { email: email },
+            {
+              $set: { password: newPassword },
+            },
+            (err) => {
+              if (err) {
+                res.status(500).json({
+                  error: "There was a server side error!",
+                });
+              } else {
+                res.status(200).json({
+                  message: "Password changed successfully!",
+                  status: true,
+                });
+              }
+            }
+          );
+        } else {
+          res.status(400).json("Password not matched");
+        }
+      }
+    });
+  } catch (error) {
+    res.status(500).send("Server error");
+  }
+});
 module.exports = router;

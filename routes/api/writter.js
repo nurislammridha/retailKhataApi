@@ -12,11 +12,14 @@ router.post("/", async (req, res) => {
     if (writter) {
       return res
         .status(400)
-        .json({ msg: "Writtter already exist with this email" });
+        .json({ message: "Writtter already exist with this email" });
     }
     writter = new Writter(req.body);
     await writter.save();
-    res.json("Writter created succesfully");
+    res.status(200).json({
+      message: "Writter created succesfully",
+      status: true,
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
@@ -34,6 +37,7 @@ router.get("/", async (req, res) => {
         res.status(200).json({
           result: data,
           message: "Writter successfully!",
+          status: true,
         });
       }
     });
@@ -74,6 +78,7 @@ router.put("/:id", async (req, res) => {
       } else {
         res.status(200).json({
           message: "Writter were updated successfully!",
+          status: true,
         });
       }
     }
@@ -128,6 +133,7 @@ router.delete("/:id", async (req, res) => {
     } else {
       res.status(200).json({
         message: "Writter was deleted successfully!",
+        status: true,
       });
     }
   });

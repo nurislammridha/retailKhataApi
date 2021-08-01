@@ -9,7 +9,18 @@ router.post("/", async (req, res) => {
   try {
     news = new News(req.body);
     await news.save((err, res1) => {
-      res.send(res1);
+      // res.send(res1);
+      if (err) {
+        res.status(500).json({
+          error: "There was a server side error!",
+        });
+      } else {
+        res.status(200).json({
+          result: res1,
+          message: "News Inserted",
+          status: true,
+        });
+      }
     });
   } catch (err) {
     console.error(err.message);
@@ -30,6 +41,7 @@ router.get("/", async (req, res) => {
           res.status(200).json({
             result: data,
             message: "All News!",
+            status: true,
           });
         }
       });
@@ -52,6 +64,7 @@ router.get("/:id", async (req, res) => {
         res.status(200).json({
           result: obj,
           message: "News by Id get successfully!",
+          status: true,
         });
       }
     });
@@ -72,6 +85,7 @@ router.put("/:id", async (req, res) => {
       } else {
         res.status(200).json({
           message: "News were updated successfully!",
+          status: true,
         });
       }
     }
@@ -88,6 +102,7 @@ router.delete("/:id", async (req, res) => {
     } else {
       res.status(200).json({
         message: "News was deleted successfully!",
+        status: true,
       });
     }
   });
