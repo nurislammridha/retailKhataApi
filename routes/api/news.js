@@ -11,6 +11,7 @@ router.post("/", async (req, res) => {
     await news.save((err, res1) => {
       // res.send(res1);
       if (err) {
+        console.log(`err`, err);
         res.status(500).json({
           error: "There was a server side error!",
         });

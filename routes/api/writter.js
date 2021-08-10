@@ -150,7 +150,10 @@ router.post("/login", async (req, res) => {
     } else if (password !== data.password) {
       res.status(400).json("Password not matched");
     } else {
-      res.json("Successfully login");
+      res.status(200).json({
+        message: "Successfully login",
+        status: true,
+      });
     }
   } catch (error) {
     res.status(500).send("Server error");
