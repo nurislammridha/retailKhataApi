@@ -44,7 +44,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Category By ID
+// Category By ID//
 router.get("/:id", async (req, res) => {
   await Category.find({ _id: req.params.id }, (err, data) => {
     if (err) {
