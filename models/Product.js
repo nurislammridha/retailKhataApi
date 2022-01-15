@@ -32,5 +32,13 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  isActive: {
+    type: String,
+    require: true,
+  },
+  priority: {
+    type: String,
+    require: true,
+  },
 });
 module.exports = Product = mongoose.model("Product", ProductSchema);
