@@ -139,7 +139,7 @@ router.get("/home/:id", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
-// all Products  which priority high and active for home page
+// all Products  which priority high and active for home page//
 router.get("/smart/home", async (req, res) => {
   try {
     await Product.find({ priority: "High" }, (err, data) => {
