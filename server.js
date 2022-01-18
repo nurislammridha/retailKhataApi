@@ -19,6 +19,7 @@ app.use("/api/v1/news", require("./routes/api/news"));
 app.use("/api/v1/test", require("./routes/api/test"));
 app.use("/api/v1/newsImg", require("./routes/api/newsImg"));
 app.use("/api/v1/product", require("./routes/api/product"));
+app.use("/api/v1/user", require("./routes/api/user"));
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Servet started on port ${PORT}`));
