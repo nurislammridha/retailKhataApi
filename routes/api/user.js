@@ -56,6 +56,7 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({
         message: "You are logging successfully!",
         isLogin: true,
+        result: data,
         status: true,
       });
     }
