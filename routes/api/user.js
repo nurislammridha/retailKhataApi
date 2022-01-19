@@ -104,27 +104,27 @@ router.get("/:id", async (req, res) => {
   });
 });
 
-//Update Category
-// router.put("/:id", async (req, res) => {
-//   await Category.updateOne(
-//     { _id: req.params.id },
-//     {
-//       $set: req.body,
-//     },
-//     (err) => {
-//       if (err) {
-//         res.status(500).json({
-//           error: "There was a server side error!",
-//         });
-//       } else {
-//         res.status(200).json({
-//           message: "Category were updated successfully!",
-//           status: true,
-//         });
-//       }
-//     }
-//   );
-// });
+// Update User By User Id
+router.put("/:id", async (req, res) => {
+  await User.updateOne(
+    { _id: req.params.id },
+    {
+      $set: req.body,
+    },
+    (err) => {
+      if (err) {
+        res.status(500).json({
+          error: "There was a server side error!",
+        });
+      } else {
+        res.status(200).json({
+          message: "User were updated successfully!",
+          status: true,
+        });
+      }
+    }
+  );
+});
 
 //delete category
 router.delete("/:id", async (req, res) => {

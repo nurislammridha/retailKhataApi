@@ -40,6 +40,10 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  orderDateTime: {
+    type: String,
+    require: true,
+  },
   productInfo: [
     {
       _id: {
@@ -84,49 +88,46 @@ const OrderSchema = new mongoose.Schema({
       },
     },
   ],
-  status: [
-    {
-      isCreated: {
-        type: Boolean,
-        require: true,
-      },
-      isCreatedDate: {
-        type: String,
-        require: true,
-      },
-      isAccepted: {
-        type: Boolean,
-        default: false,
-      },
-      isAcceptedDate: {
-        type: String,
-        default: "",
-      },
-      isProcessing: {
-        type: Boolean,
-        default: false,
-      },
-      isProcessingDate: {
-        type: String,
-        default: "",
-      },
-      isDelivering: {
-        type: Boolean,
-        default: false,
-      },
-      isDeliveringDate: {
-        type: String,
-        default: "",
-      },
-      isDelivered: {
-        type: Boolean,
-        default: false,
-      },
-      isDeliveredDate: {
-        type: String,
-        default: "",
-      },
-    },
-  ],
+
+  isCreated: {
+    type: Boolean,
+    require: true,
+  },
+  isCreatedDate: {
+    type: String,
+    require: true,
+  },
+  isAccepted: {
+    type: Boolean,
+    default: false,
+  },
+  isAcceptedDate: {
+    type: String,
+    default: "",
+  },
+  isProcessing: {
+    type: Boolean,
+    default: false,
+  },
+  isProcessingDate: {
+    type: String,
+    default: "",
+  },
+  isDelivering: {
+    type: Boolean,
+    default: false,
+  },
+  isDeliveringDate: {
+    type: String,
+    default: "",
+  },
+  isDelivered: {
+    type: Boolean,
+    default: false,
+  },
+  isDeliveredDate: {
+    type: String,
+    default: "",
+  },
 });
 module.exports = Order = mongoose.model("Order", OrderSchema);

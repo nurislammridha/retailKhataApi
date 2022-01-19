@@ -55,10 +55,42 @@ router.get("/:id", async (req, res) => {
     }
   });
 });
+// Order By Date 23-12-0000
+router.get("/date/:id", async (req, res) => {
+  await Order.find({ orderDate: req.params.id }, (err, data) => {
+    if (err) {
+      res.status(500).json({
+        error: "There was a server side error!",
+      });
+    } else {
+      res.status(200).json({
+        result: data,
+        message: "Order showing!",
+        status: true,
+      });
+    }
+  });
+});
+// Order By userID
+router.get("/user/:id", async (req, res) => {
+  await Order.find({ userId: req.params.id }, (err, data) => {
+    if (err) {
+      res.status(500).json({
+        error: "There was a server side error!",
+      });
+    } else {
+      res.status(200).json({
+        result: data,
+        message: "Order showing!",
+        status: true,
+      });
+    }
+  });
+});
 
-//Update Category
+//Update Order By Order Id
 router.put("/:id", async (req, res) => {
-  await Category.updateOne(
+  await Order.updateOne(
     { _id: req.params.id },
     {
       $set: req.body,
@@ -70,7 +102,7 @@ router.put("/:id", async (req, res) => {
         });
       } else {
         res.status(200).json({
-          message: "Category were updated successfully!",
+          message: "Order were updated successfully!",
           status: true,
         });
       }
@@ -78,16 +110,16 @@ router.put("/:id", async (req, res) => {
   );
 });
 
-//delete category
+//delete Order by Order id
 router.delete("/:id", async (req, res) => {
-  await Category.deleteOne({ _id: req.params.id }, (err) => {
+  await Order.deleteOne({ _id: req.params.id }, (err) => {
     if (err) {
       res.status(500).json({
         error: "There was a server side error!",
       });
     } else {
       res.status(200).json({
-        message: "Category was deleted successfully!",
+        message: "Order was deleted successfully!",
         status: true,
       });
     }
