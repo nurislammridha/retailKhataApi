@@ -47,13 +47,13 @@ router.post("/login", async (req, res) => {
     let data = await User.findOne({ phoneNumber });
     console.log(`data.password`, data.password);
     if (data && password !== data.password) {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "Please try with a valid password",
         isLogin: false,
         status: true,
       });
     } else {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "You are logging successfully!",
         isLogin: true,
         result: data,

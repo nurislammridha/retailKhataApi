@@ -7,7 +7,7 @@ connectDB();
 //Initial middleware
 app.use(express.json({ extended: false }));
 app.use(express.static("up"));
-app.get("/", (req, res) => res.send("API Running"));
+app.get("/", (req, res) => res.send("API Running1"));
 //Define Routes
 //cors policy
 app.use(cors());
