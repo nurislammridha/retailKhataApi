@@ -23,13 +23,13 @@ router.post("/phone", async (req, res) => {
   try {
     let phone = await User.findOne({ phoneNumber });
     if (phone) {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "Phone number already exist",
         isPhoneNumber: true,
         status: true,
       });
     } else {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "No phone number found",
         isPhoneNumber: false,
         status: true,
@@ -47,15 +47,16 @@ router.post("/login", async (req, res) => {
     let data = await User.findOne({ phoneNumber });
     console.log(`data.password`, data.password);
     if (data && password !== data.password) {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "Please try with a valid password",
         isLogin: false,
         status: true,
       });
     } else {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "You are logging successfully!",
         isLogin: true,
+        result: data,
         status: true,
       });
     }
@@ -103,27 +104,27 @@ router.get("/:id", async (req, res) => {
   });
 });
 
-//Update Category
-// router.put("/:id", async (req, res) => {
-//   await Category.updateOne(
-//     { _id: req.params.id },
-//     {
-//       $set: req.body,
-//     },
-//     (err) => {
-//       if (err) {
-//         res.status(500).json({
-//           error: "There was a server side error!",
-//         });
-//       } else {
-//         res.status(200).json({
-//           message: "Category were updated successfully!",
-//           status: true,
-//         });
-//       }
-//     }
-//   );
-// });
+// Update User By User Id//
+router.put("/:id", async (req, res) => {
+  await User.updateOne(
+    { _id: req.params.id },
+    {
+      $set: req.body,
+    },
+    (err) => {
+      if (err) {
+        res.status(500).json({
+          error: "There was a server side error!",
+        });
+      } else {
+        res.status(200).json({
+          message: "User were updated successfully!",
+          status: true,
+        });
+      }
+    }
+  );
+});
 
 //delete category
 router.delete("/:id", async (req, res) => {
