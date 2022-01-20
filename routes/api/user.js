@@ -104,7 +104,7 @@ router.get("/:id", async (req, res) => {
   });
 });
 
-// Update User By User Id
+// Update User By User Id//
 router.put("/:id", async (req, res) => {
   await User.updateOne(
     { _id: req.params.id },
