@@ -23,13 +23,13 @@ router.post("/phone", async (req, res) => {
   try {
     let phone = await User.findOne({ phoneNumber });
     if (phone) {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "Phone number already exist",
         isPhoneNumber: true,
         status: true,
       });
     } else {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "No phone number found",
         isPhoneNumber: false,
         status: true,
