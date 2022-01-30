@@ -99,7 +99,7 @@ router.get("/", async (req, res) => {
 // all Products by category
 router.get("/:id", async (req, res) => {
   try {
-    await Product.find({ categoryId: req.params.id }, (err, data) => {
+    await Product.find({ _id: req.params.id }, (err, data) => {
       if (err) {
         res.status(500).json({
           error: "There was a server side error!",
@@ -160,39 +160,69 @@ router.get("/smart/home", async (req, res) => {
   }
 });
 
-// //Update Image
-// //Update Feature Images
-// router.put("/feature/:id", upload.single("feature_img"), async (req, res) => {
-//   const feature_img = req.file;
-//   var info = {
-//     featureImg: feature_img.path,
-//   };
-//   //delete before thumbnail imag
-//   await NewsImg.find({ newsId: req.params.id }, (err, data) => {
-//     const [info] = data;
-//     fs.unlinkSync(info.featureImg);
-//   });
+//Update Product
+router.put(
+  "/:id",
+  upload.fields([{ name: "product_image", maxCount: 1 }]),
+  async (req, res) => {
+    const { product_image } = req.files;
+    const {
+      product_name,
+      category_id,
+      category_name,
+      product_mrp,
+      is_discount,
+      discount_price,
+      product_code,
+      is_active,
+      priority,
+    } = req.body;
 
-//   //Now updated
-//   await NewsImg.updateOne(
-//     { newsId: req.params.id },
-//     {
-//       $set: info,
-//     },
-//     (err) => {
-//       if (err) {
-//         res.status(500).json({
-//           error: "There was a server side error!",
-//         });
-//       } else {
-//         res.status(200).json({
-//           message: "Feature were updated successfully!",
-//           status: true,
-//         });
-//       }
-//     }
-//   );
-// });
+    var info = {
+      productName: product_name,
+      categoryId: category_id,
+      categoryName: category_name,
+      productMRP: product_mrp,
+      isDiscount: is_discount,
+      discountPrice: discount_price,
+      productCode: product_code,
+      isActive: is_active,
+      priority: priority,
+    };
+
+    //delete before thumbnail imag
+    if (product_image !== undefined) {
+      await Product.find({ _id: req.params.id }, (err, data) => {
+        const [info] = data;
+        if (info.productImage !== null) {
+          fs.unlinkSync(info.productImage);
+        }
+      });
+      const [productImg] = product_image;
+      info.productImage = productImg.path;
+    }
+
+    //Now updated
+    await Product.updateOne(
+      { _id: req.params.id },
+      {
+        $set: info,
+      },
+      (err) => {
+        if (err) {
+          res.status(500).json({
+            error: "There was a server side error!",
+          });
+        } else {
+          res.status(200).json({
+            message: "Product were updated successfully!",
+            status: true,
+          });
+        }
+      }
+    );
+  }
+);
 // //Update Thumbnail Images
 // router.put(
 //   "/thumbnail/:id",
@@ -250,24 +280,23 @@ router.get("/smart/home", async (req, res) => {
 //   );
 // });
 
-//delete category
-// router.delete("/:id", async (req, res) => {
-//   await NewsImg.find({ _id: req.params.id }, (err, data) => {
-//     const [info] = data;
-//     fs.unlinkSync(info.featureImg);
-//     fs.unlinkSync(info.thumbnailImg);
-//   });
-//   await NewsImg.deleteOne({ _id: req.params.id }, (err) => {
-//     if (err) {
-//       res.status(500).json({
-//         error: "There was a server side error!",
-//       });
-//     } else {
-//       res.status(200).json({
-//         message: "News Img was deleted successfully!",
-//         status: true,
-//       });
-//     }
-//   });
-// });
+//delete Product
+router.delete("/:id", async (req, res) => {
+  await Product.find({ _id: req.params.id }, (err, data) => {
+    const [info] = data;
+    fs.unlinkSync(info.productImage);
+  });
+  await Product.deleteOne({ _id: req.params.id }, (err) => {
+    if (err) {
+      res.status(500).json({
+        error: "There was a server side error!",
+      });
+    } else {
+      res.status(200).json({
+        message: "Product Img was deleted successfully!",
+        status: true,
+      });
+    }
+  });
+});
 module.exports = router;

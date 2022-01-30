@@ -37,6 +37,28 @@ router.get("/", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
+//all Order list by status
+router.get("/status", async (req, res) => {
+  const { date, status } = req.query;
+
+  try {
+    await Order.find({ orderDate: date, [status]: true }, (err, data) => {
+      if (err) {
+        res.status(500).json({
+          error: "There was a server side error!",
+        });
+      } else {
+        res.status(200).json({
+          result: data,
+          message: "All Orders are showing successfully!",
+          status: true,
+        });
+      }
+    });
+  } catch (error) {
+    res.status(500).send("Server error");
+  }
+});
 
 // Order By ID// Order details
 router.get("/:id", async (req, res) => {
