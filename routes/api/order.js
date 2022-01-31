@@ -42,7 +42,7 @@ router.get("/status", async (req, res) => {
   const { date, status } = req.query;
 
   try {
-    await Order.find({ orderDate: date, [status]: true }, (err, data) => {
+    await Order.find({ orderDate: date, [status]: false }, (err, data) => {
       if (err) {
         res.status(500).json({
           error: "There was a server side error!",
