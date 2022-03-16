@@ -48,6 +48,10 @@ router.post(
       product_code,
       is_active,
       priority,
+      discount_price_bn,
+      product_mrp_bn,
+      category_name_bn,
+      product_name_bn,
     } = req.body;
     const [productImg] = product_image;
     // const [productCode] = product_code;
@@ -62,6 +66,10 @@ router.post(
       productImage: productImg.path,
       isActive: is_active,
       priority: priority,
+      productNameBn: product_name_bn,
+      categoryNameBn: category_name_bn,
+      productMRPBn: product_mrp_bn,
+      discountPriceBn: discount_price_bn,
     };
     try {
       info = new Product(info);
@@ -176,6 +184,10 @@ router.put(
       product_code,
       is_active,
       priority,
+      product_name_bn,
+      category_name_bn,
+      product_mrp_bn,
+      discount_price_bn,
     } = req.body;
 
     var info = {
@@ -188,6 +200,10 @@ router.put(
       productCode: product_code,
       isActive: is_active,
       priority: priority,
+      productNameBn: product_name_bn,
+      categoryNameBn: category_name_bn,
+      productMRPBn: product_mrp_bn,
+      discountPriceBn: discount_price_bn,
     };
 
     //delete before thumbnail imag

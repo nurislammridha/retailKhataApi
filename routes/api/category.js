@@ -5,14 +5,14 @@ const Category = require("../../models/Category");
 //@desc Admin login
 //@access Public
 router.post("/", async (req, res) => {
-  const { categoryName, isActive } = req.body;
+  const { categoryName, categoryNameBn, isActive } = req.body;
   try {
     let catName = await Category.findOne({ categoryName });
     //see if user exists
     if (catName) {
       return res.status(400).json({ message: "Category already exist" });
     }
-    category = new Category({ categoryName, isActive });
+    category = new Category({ categoryName, categoryNameBn, isActive });
     await category.save();
     res.status(200).json({
       message: "Category inserted succesfully",

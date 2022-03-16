@@ -54,7 +54,15 @@ const OrderSchema = new mongoose.Schema({
         type: String,
         require: true,
       },
+      quantityBn: {
+        type: String,
+        require: true,
+      },
       productName: {
+        type: String,
+        require: true,
+      },
+      productNameBn: {
         type: String,
         require: true,
       },
@@ -66,7 +74,15 @@ const OrderSchema = new mongoose.Schema({
         type: String,
         require: true,
       },
+      categoryNameBn: {
+        type: String,
+        require: true,
+      },
       productMRP: {
+        type: String,
+        require: true,
+      },
+      productMRPBn: {
         type: String,
         require: true,
       },
@@ -75,6 +91,10 @@ const OrderSchema = new mongoose.Schema({
         require: true,
       },
       discountPrice: {
+        type: String,
+        require: true,
+      },
+      discountPriceBn: {
         type: String,
         require: true,
       },
