@@ -107,7 +107,7 @@ router.get("/", async (req, res) => {
 // all Products by category
 router.get("/:id", async (req, res) => {
   try {
-    await Product.find({ _id: req.params.id }, (err, data) => {
+    await Product.find({ categoryId: req.params.id }, (err, data) => {
       if (err) {
         res.status(500).json({
           error: "There was a server side error!",
