@@ -104,8 +104,31 @@ router.get("/", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
-// all Products by category
+// all Products by category which products are active
 router.get("/:id", async (req, res) => {
+  try {
+    await Product.find(
+      { categoryId: req.params.id, isActive: "true" },
+      (err, data) => {
+        if (err) {
+          res.status(500).json({
+            error: "There was a server side error!",
+          });
+        } else {
+          res.status(200).json({
+            result: data,
+            message: "Get successfully!",
+            status: true,
+          });
+        }
+      }
+    );
+  } catch (error) {
+    res.status(500).send("Server error");
+  }
+});
+// all Products by category which products are active/inactive
+router.get("/dashboard/:id", async (req, res) => {
   try {
     await Product.find({ categoryId: req.params.id }, (err, data) => {
       if (err) {
