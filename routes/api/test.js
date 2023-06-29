@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Test = require("../../models/Test");
+const Test = require("../../models/RetailKhata");
 var multer = require("multer");
 const path = require("path");
 const folder = "./up/";

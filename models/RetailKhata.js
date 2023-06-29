@@ -13,4 +13,4 @@ const TestSchema = new mongoose.Schema({
     require: true,
   },
 });
-module.exports = Test = mongoose.model("Test", TestSchema);
+module.exports = Test = mongoose.model("RetailKhata", TestSchema);
