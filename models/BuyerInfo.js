@@ -1,18 +1,16 @@
 const mongoose = require("mongoose");
-const AdminSchema = new mongoose.Schema({
+const BuyerInfoSchema = new mongoose.Schema({
   name: {
     type: String,
     require: true,
-    unique: true,
   },
-  email: {
-    type: String,
-    require: true,
-    unique: true,
-  },
-  password: {
+  phoneNumber: {
     type: String,
     require: true,
   },
+  address: {
+    type: String,
+    require: true,
+  }
 });
-module.exports = Admin = mongoose.model("Admin", AdminSchema);
+module.exports = BuyerInfo = mongoose.model("BuyerInfo", BuyerInfoSchema);

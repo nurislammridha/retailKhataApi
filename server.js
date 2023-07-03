@@ -6,21 +6,17 @@ const app = express();
 connectDB();
 //Initial middleware
 app.use(express.json({ extended: false }));
-app.use(express.static("up"));
 app.get("/", (req, res) => res.send("API Running1"));
 //Define Routes
 //cors policy
 app.use(cors());
 app.options("*", cors());
-app.use("/api/v1/admin", require("./routes/api/admin"));
-app.use("/api/v1/category", require("./routes/api/category"));
-app.use("/api/v1/writter", require("./routes/api/writter"));
-app.use("/api/v1/news", require("./routes/api/news"));
-app.use("/api/v1/test", require("./routes/api/test"));
-app.use("/api/v1/newsImg", require("./routes/api/newsImg"));
-app.use("/api/v1/product", require("./routes/api/product"));
-app.use("/api/v1/user", require("./routes/api/user"));
-app.use("/api/v1/order", require("./routes/api/order"));
+app.use("/api/v1/daily-buy", require("./routes/api/dailyBuy"));
+app.use("/api/v1/daily-sell", require("./routes/api/dailySell"));
+app.use("/api/v1/buyer-info", require("./routes/api/buyerInfo"));
+app.use("/api/v1/dealer-info", require("./routes/api/dealerInfo"));
+app.use("/api/v1/product-info", require("./routes/api/productInfo"));
+app.use("/api/v1/unit-info", require("./routes/api/unitInfo"));
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Servet started on port ${PORT}`));

@@ -1,60 +1,62 @@
 const mongoose = require("mongoose");
-const ProductSchema = new mongoose.Schema({
+const DailySellSchema = new mongoose.Schema({
+  date: {
+    type: String,
+    require: true,
+  },
+  buyerName: {
+    type: String,
+    require: true,
+  },
+  buyerID: {
+    type: String,
+    require: true,
+  },
   productName: {
     type: String,
     require: true,
   },
-  productNameBn: {
+  productID: {
     type: String,
     require: true,
   },
-  categoryId: {
+  unitName: {
     type: String,
     require: true,
   },
-  categoryName: {
+  unitID: {
     type: String,
     require: true,
   },
-  categoryNameBn: {
+  quantity: {
     type: String,
     require: true,
   },
-  productMRP: {
+  totalPrice: {
     type: String,
     require: true,
   },
-  productMRPBn: {
+  cash: {
     type: String,
     require: true,
   },
-  isDiscount: {
+  due: {
     type: String,
     require: true,
   },
-  discountPrice: {
+  details: {
     type: String,
     require: true,
   },
-  discountPriceBn: {
-    type: String,
+  isPaid: {
+    type: Boolean,
     require: true,
   },
-  productCode: {
-    type: String,
-    require: true,
-  },
-  productImage: {
-    type: String,
-    require: true,
-  },
-  isActive: {
-    type: String,
-    require: true,
-  },
-  priority: {
-    type: String,
-    require: true,
-  },
+  paymentHistory: [
+    {
+      paymentDate: { type: String, require: true },
+      amount: { type: String, require: true }
+    }
+  ]
 });
-module.exports = Product = mongoose.model("Product", ProductSchema);
+module.exports = DailySell = mongoose.model("DailySell", DailySellSchema);
