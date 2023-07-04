@@ -13,7 +13,7 @@ app.use(cors());
 app.options("*", cors());
 app.use("/api/v1/daily-buy", require("./routes/api/dailyBuy"));
 app.use("/api/v1/daily-sell", require("./routes/api/dailySell"));
-app.use("/api/v1/buyer-info", require("./routes/api/buyerInfo"));
+app.use("/api/v1/customer-info", require("./routes/api/buyerInfo"));
 app.use("/api/v1/dealer-info", require("./routes/api/dealerInfo"));
 app.use("/api/v1/product-info", require("./routes/api/productInfo"));
 app.use("/api/v1/unit-info", require("./routes/api/unitInfo"));

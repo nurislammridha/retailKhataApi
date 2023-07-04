@@ -7,10 +7,10 @@ const BuyerInfo = require("../../models/BuyerInfo");
 router.post("/", async (req, res) => {
   try {
 
-    const dailyBuy = new DailyBuy(req.body);
-    await dailyBuy.save();
+    const buyerInfo = new BuyerInfo(req.body);
+    await buyerInfo.save();
     res.status(200).json({
-      message: "Category inserted successfully",
+      message: "Customer inserted successfully",
       status: true,
     });
   } catch (err) {
@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
 //all DailyBuy
 router.get("/", async (req, res) => {
   try {
-    await DailyBuy.find((err, data) => {
+    await BuyerInfo.find((err, data) => {
       if (err) {
         res.status(500).json({
           error: "There was a server side error!",
@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
       } else {
         res.status(200).json({
           result: data,
-          message: "All buying product!",
+          message: "Our all customer list!",
           status: true,
         });
       }
@@ -41,7 +41,7 @@ router.get("/", async (req, res) => {
 
 // DailyBuy By ID//
 router.get("/:id", async (req, res) => {
-  await DailyBuy.find({ _id: req.params.id }, (err, data) => {
+  await BuyerInfo.find({ _id: req.params.id }, (err, data) => {
     if (err) {
       res.status(500).json({
         error: "There was a server side error!",
@@ -50,7 +50,7 @@ router.get("/:id", async (req, res) => {
       let [obj] = data;
       res.status(200).json({
         result: obj,
-        message: "All buying product by id!",
+        message: "Customer by id!",
         status: true,
       });
     }
@@ -59,7 +59,7 @@ router.get("/:id", async (req, res) => {
 
 //Update DailyBuy
 router.put("/:id", async (req, res) => {
-  await DailyBuy.updateOne(
+  await BuyerInfo.updateOne(
     { _id: req.params.id },
     {
       $set: req.body,
@@ -71,7 +71,7 @@ router.put("/:id", async (req, res) => {
         });
       } else {
         res.status(200).json({
-          message: "DailyBuy were updated successfully!",
+          message: "Customer were updated successfully!",
           status: true,
         });
       }
@@ -81,14 +81,14 @@ router.put("/:id", async (req, res) => {
 
 //delete category
 router.delete("/:id", async (req, res) => {
-  await DailyBuy.deleteOne({ _id: req.params.id }, (err) => {
+  await BuyerInfo.deleteOne({ _id: req.params.id }, (err) => {
     if (err) {
       res.status(500).json({
         error: "There was a server side error!",
       });
     } else {
       res.status(200).json({
-        message: "DailyBuy was deleted successfully!",
+        message: "Customer was deleted successfully!",
         status: true,
       });
     }

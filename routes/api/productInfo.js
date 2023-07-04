@@ -7,10 +7,10 @@ const ProductInfo = require("../../models/ProductInfo");
 router.post("/", async (req, res) => {
   try {
 
-    const dailyBuy = new DailyBuy(req.body);
-    await dailyBuy.save();
+    const productInfo = new ProductInfo(req.body);
+    await productInfo.save();
     res.status(200).json({
-      message: "Category inserted successfully",
+      message: "Product inserted successfully",
       status: true,
     });
   } catch (err) {
@@ -18,10 +18,10 @@ router.post("/", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
-//all DailyBuy
+//all product
 router.get("/", async (req, res) => {
   try {
-    await DailyBuy.find((err, data) => {
+    await ProductInfo.find((err, data) => {
       if (err) {
         res.status(500).json({
           error: "There was a server side error!",
@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
       } else {
         res.status(200).json({
           result: data,
-          message: "All buying product!",
+          message: "All product list!",
           status: true,
         });
       }
@@ -39,9 +39,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-// DailyBuy By ID//
+// Product By ID//
 router.get("/:id", async (req, res) => {
-  await DailyBuy.find({ _id: req.params.id }, (err, data) => {
+  await ProductInfo.find({ _id: req.params.id }, (err, data) => {
     if (err) {
       res.status(500).json({
         error: "There was a server side error!",
@@ -50,16 +50,16 @@ router.get("/:id", async (req, res) => {
       let [obj] = data;
       res.status(200).json({
         result: obj,
-        message: "All buying product by id!",
+        message: "Product by id!",
         status: true,
       });
     }
   });
 });
 
-//Update DailyBuy
+//Update product
 router.put("/:id", async (req, res) => {
-  await DailyBuy.updateOne(
+  await ProductInfo.updateOne(
     { _id: req.params.id },
     {
       $set: req.body,
@@ -71,7 +71,7 @@ router.put("/:id", async (req, res) => {
         });
       } else {
         res.status(200).json({
-          message: "DailyBuy were updated successfully!",
+          message: "Product were updated successfully!",
           status: true,
         });
       }
@@ -79,16 +79,16 @@ router.put("/:id", async (req, res) => {
   );
 });
 
-//delete category
+//delete product
 router.delete("/:id", async (req, res) => {
-  await DailyBuy.deleteOne({ _id: req.params.id }, (err) => {
+  await ProductInfo.deleteOne({ _id: req.params.id }, (err) => {
     if (err) {
       res.status(500).json({
         error: "There was a server side error!",
       });
     } else {
       res.status(200).json({
-        message: "DailyBuy was deleted successfully!",
+        message: "Product was deleted successfully!",
         status: true,
       });
     }
