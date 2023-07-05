@@ -33,19 +33,23 @@ const DailySellSchema = new mongoose.Schema({
     require: true,
   },
   totalPrice: {
-    type: String,
+    type: Number,
     require: true,
   },
   cash: {
-    type: String,
+    type: Number,
     require: true,
   },
   due: {
-    type: String,
+    type: Number,
     require: true,
   },
   details: {
     type: String,
+    require: true,
+  },
+  profit: {
+    type: Number,
     require: true,
   },
   isPaid: {

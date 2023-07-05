@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
     const dailySell = new DailySell(req.body);
     await dailySell.save();
     res.status(200).json({
-      message: "Category inserted successfully",
+      message: "Sell inserted successfully",
       status: true,
     });
   } catch (err) {
@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
       } else {
         res.status(200).json({
           result: data,
-          message: "All buying product!",
+          message: "All selling product!",
           status: true,
         });
       }
@@ -50,7 +50,24 @@ router.get("/:id", async (req, res) => {
       let [obj] = data;
       res.status(200).json({
         result: obj,
-        message: "All buying product by id!",
+        message: "All selling product by id!",
+        status: true,
+      });
+    }
+  });
+});
+// DailySell By Date//
+router.get("/date/:id", async (req, res) => {
+  await DailySell.find({ date: req.params.id }, (err, data) => {
+    if (err) {
+      res.status(500).json({
+        error: "There was a server side error!",
+      });
+    } else {
+      // let [obj] = data;
+      res.status(200).json({
+        result: data,
+        message: "All selling product by date!",
         status: true,
       });
     }

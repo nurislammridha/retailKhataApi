@@ -11,6 +11,10 @@ const ProductInfoSchema = new mongoose.Schema({
   unitID: {
     type: String,
     require: true,
+  },
+  presentPricePerUnit: {
+    type: Number,
+    require: true,
   }
 });
 module.exports = ProductInfo = mongoose.model("ProductInfo", ProductInfoSchema);

@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
     const dailyBuy = new DailyBuy(req.body);
     await dailyBuy.save();
     res.status(200).json({
-      message: "Category inserted successfully",
+      message: "Buying added successfully",
       status: true,
     });
   } catch (err) {
@@ -79,7 +79,7 @@ router.put("/:id", async (req, res) => {
   );
 });
 
-//delete category
+//delete DailyBuy
 router.delete("/:id", async (req, res) => {
   await DailyBuy.deleteOne({ _id: req.params.id }, (err) => {
     if (err) {
