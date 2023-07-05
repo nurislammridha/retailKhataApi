@@ -4,11 +4,15 @@ const DailyBuySchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  sellerName: {
+  timeStamp: {
     type: String,
     require: true,
   },
-  sellerID: {
+  dealerName: {
+    type: String,
+    require: true,
+  },
+  dealerID: {
     type: String,
     require: true,
   },
@@ -29,19 +33,23 @@ const DailyBuySchema = new mongoose.Schema({
     require: true,
   },
   quantity: {
-    type: String,
+    type: Number,
+    require: true,
+  },
+  pricePerUnit: {
+    type: Number,
     require: true,
   },
   totalPrice: {
-    type: String,
+    type: Number,
     require: true,
   },
   cash: {
-    type: String,
+    type: Number,
     require: true,
   },
   due: {
-    type: String,
+    type: Number,
     require: true,
   },
   details: {
@@ -49,7 +57,7 @@ const DailyBuySchema = new mongoose.Schema({
     require: true,
   },
   otherCost: {
-    type: String,
+    type: Number,
     require: true,
   },
   isPaid: {
@@ -59,8 +67,8 @@ const DailyBuySchema = new mongoose.Schema({
   paymentHistory: [
     {
       paymentDate: { type: String, require: true },
-      amount: { type: String, require: true }
-    }
-  ]
+      amount: { type: Number, require: true },
+    },
+  ],
 });
 module.exports = DailyBuy = mongoose.model("DailyBuy", DailyBuySchema);

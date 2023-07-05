@@ -4,11 +4,23 @@ const DailySellSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  timeStamp: {
+    type: Number,
+    require: true,
+  },
   buyerName: {
     type: String,
     require: true,
   },
   buyerID: {
+    type: String,
+    require: true,
+  },
+  buyerPhone: {
+    type: String,
+    require: true,
+  },
+  buyerAddress: {
     type: String,
     require: true,
   },
@@ -59,8 +71,8 @@ const DailySellSchema = new mongoose.Schema({
   paymentHistory: [
     {
       paymentDate: { type: String, require: true },
-      amount: { type: String, require: true }
-    }
-  ]
+      amount: { type: Number, require: true },
+    },
+  ],
 });
 module.exports = DailySell = mongoose.model("DailySell", DailySellSchema);
