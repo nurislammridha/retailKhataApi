@@ -6,7 +6,6 @@ const ProductInfo = require("../../models/ProductInfo");
 //@access Public
 router.post("/", async (req, res) => {
   try {
-
     const productInfo = new ProductInfo(req.body);
     await productInfo.save();
     res.status(200).json({
@@ -78,27 +77,27 @@ router.put("/:id", async (req, res) => {
     }
   );
 });
-//Update product
-// router.put("/:id", async (req, res) => {
-//   await ProductInfo.updateOne(
-//     { _id: req.params.id },
-//     {
-//     $set: { password: newPassword },,
-//     },
-//     (err) => {
-//       if (err) {
-//         res.status(500).json({
-//           error: "There was a server side error!",
-//         });
-//       } else {
-//         res.status(200).json({
-//           message: "Product were updated successfully!",
-//           status: true,
-//         });
-//       }
-//     }
-//   );
-// });
+// Update product presentPricePerUnit
+router.put("/presentPricePerUnit/:id", async (req, res) => {
+  await ProductInfo.updateOne(
+    { _id: req.params.id },
+    {
+      $set: { presentPricePerUnit: req?.body?.presentPricePerUnit },
+    },
+    (err) => {
+      if (err) {
+        res.status(500).json({
+          error: "There was a server side error!",
+        });
+      } else {
+        res.status(200).json({
+          message: "Present Price PerUnit were updated successfully!",
+          status: true,
+        });
+      }
+    }
+  );
+});
 
 //delete product
 router.delete("/:id", async (req, res) => {
