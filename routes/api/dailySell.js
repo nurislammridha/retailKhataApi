@@ -73,6 +73,23 @@ router.get("/date/:id", async (req, res) => {
     }
   });
 });
+// DailySell By CustomerID//
+router.get("/customer-unpaid/:id", async (req, res) => {
+  await DailySell.find({ buyerID: req.params.id, isPaid: false }, (err, data) => {
+    if (err) {
+      res.status(500).json({
+        error: "There was a server side error!",
+      });
+    } else {
+      // let [obj] = data;
+      res.status(200).json({
+        result: data,
+        message: "All selling product by customer!",
+        status: true,
+      });
+    }
+  });
+});
 
 //Update DailySell
 router.put("/:id", async (req, res) => {

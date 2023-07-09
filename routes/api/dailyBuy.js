@@ -72,6 +72,23 @@ router.get("/date/:id", async (req, res) => {
     }
   });
 });
+// DailyBuy By ProductID//
+router.get("/product/:id", async (req, res) => {
+  await DailyBuy.find({ productID: req.params.id }, (err, data) => {
+    if (err) {
+      res.status(500).json({
+        error: "There was a server side error!",
+      });
+    } else {
+      // let [obj] = data;
+      res.status(200).json({
+        result: data,
+        message: "All buying product by product!",
+        status: true,
+      });
+    }
+  });
+});
 //Update DailyBuy
 router.put("/:id", async (req, res) => {
   await DailyBuy.updateOne(
