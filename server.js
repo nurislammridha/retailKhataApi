@@ -16,6 +16,7 @@ app.use("/api/v1/daily-sell", require("./routes/api/dailySell"));
 app.use("/api/v1/customer-info", require("./routes/api/buyerInfo"));
 app.use("/api/v1/dealer-info", require("./routes/api/dealerInfo"));
 app.use("/api/v1/product-info", require("./routes/api/productInfo"));
+app.use("/api/v1/crDr", require("./routes/api/crDr"));
 app.use("/api/v1/unit-info", require("./routes/api/unitInfo"));
 const PORT = process.env.PORT || 5000;
 
